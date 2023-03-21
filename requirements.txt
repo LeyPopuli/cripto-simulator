@@ -1,0 +1,4 @@
+autopep8==2.0.2
+Flask==2.2.3
+Flask-WTF==1.1.1
+python-dotenv==1.0.0

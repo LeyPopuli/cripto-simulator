@@ -32,10 +32,10 @@ For a correct functioning of the app, follow the next steps:
 * Type in the terminal "flask run", please make sure you have the environment activate. 
 ***
 ## Developer :computer:	
-Hi! My name is Leyre, as the final project of the Keepcoding Zero Bootcamp, I made a crypto investment simulator to play with the values to see if we can make our investment grow in euros or not. 
+Hi! My name is **Leyre**, as the final project of the Keepcoding Zero Bootcamp, I made a crypto investment simulator to play with the values to see if we can make our investment grow or not. 
 
-To do this we created an application in **Flask** that will consult the real value in euros of the ten cryptocurrencies with the highest turnover at the moment.
+To do this, we created an application in **Flask** that will consult the real value of the ten cryptocurrencies with the highest turnover at the moment.
 
 Any doubts? Any problems with the above instructions? Please contact me in: leyrezgz95@gmail.com 
 
-# Thanks for the interest! :grin:
+## Thanks for the interest! :grin:
