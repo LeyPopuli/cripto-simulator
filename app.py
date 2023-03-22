@@ -1,3 +1,3 @@
-from cripto import app
-from cripto.views import *
-from cripto.api import *
+from crypto import app
+from crypto.views import *
+from crypto.api import *
