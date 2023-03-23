@@ -24,8 +24,9 @@
 <body>
 
   <header id="header" class="header">
-    <img id="img-logo" src="{{ url_for('static', filename='logo.png') }}" width="30" height="30">
-    <h1 id="logo"><a href="/">CryptoBoost</a></h1>
+    <a href="{{ url_for('index') }}"><img id="img-logo"
+        src="{{ url_for('static', filename='logo.png') }}" width="30" height="30"></a>
+    <h1 id="logo"><a href="{{ url_for('index') }}">CryptoBoost</a></h1>
 
     <nav id="navbar" class="navbar">
       <ul>
