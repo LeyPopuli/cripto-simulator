@@ -5,32 +5,72 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crypto</title>
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-  <link rel="stylesheet" href="/static/css/flat-remix.css">
+  <title>CryptoBoost</title>
+
+  <!-- Template Main CSS File -->
   <link rel="stylesheet" href="/static/css/styles.css">
-  {% block scripts %}
-  {% endblock scripts %}
+
+  <!-- Favicon -->
+  <link rel="icon" href="{{ url_for('static', filename='icon.ico') }}">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+
 </head>
 
 <body>
 
-  {% include 'components/header.html' %}
-  {% include 'components/navbar.html' %}
+  <header id="header" class="header">
+    <img id="img-logo" src="{{ url_for('static', filename='logo.png') }}" width="30" height="30">
+    <h1 id="logo"><a href="/">CryptoBoost</a></h1>
 
-  <div class="overlay off" id="spinner">
-    <div class="doble-anillo"></div>
-  </div>
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li class="{% if request.path == url_for('index') %}active{% endif %}">
+          <a href="{{ url_for('index') }}">Home</a>
+        </li>
+        <li class="{% if request.path == url_for('purchase') %}active{% endif %}">
+          <a href="{{ url_for('purchase') }}">Purchase</a>
+        </li>
+        <li class="{% if request.path == url_for('status') %}active{% endif %}">
+          <a href="{{ url_for('status') }}">Status</a>
+        </li>
+        <li class="sign-up {% if request.path == url_for('signup') %} active {% endif %}">
+          <a href="{{ url_for('signup') }}">Sign-up</a>
+        </li>
+        <li class="log-in {% if request.path == url_for('login') %} active {% endif %}">
+          <a href="{{ url_for('login') }}">Log-in</a>
+        </li>
+      </ul>
+    </nav>
+
+  </header>
 
   <main>
 
-    {% block contenido%}
-    {% endblock contenido %}
+    <h1>gsfsf</h1>
+    <h1>gsfsf</h1>
+    <h1>gsfsf</h1>
+    <h1>gsfsf</h1>
+    <h1>gsfsf</h1>
+    <h1>gsfsf</h1>
 
   </main>
 
-  {% include 'components/footer.html' %}
+  <footer id="footer">
+    <div class="copyright">
+      &copy; Copyright <strong>CryptoBoost</strong>. All Rights Reserved (Bootcamp Zero Keepcoding).
+    </div>
+    <div class="credits">
+      Designed by <a href="https://github.com/LeyPopuli"> Leyre Gracia </a>
+    </div>
+  </footer><!-- End Footer -->
+
+  {% block scripts %}
+  {% endblock scripts %}
 
 </body>
 

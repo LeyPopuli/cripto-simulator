@@ -1,0 +1,179 @@
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+    font-family: "Open Sans", sans-serif;
+    color: #444444;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: block;
+    padding-top: 50px;
+    padding-left: 15px;
+}
+
+a {
+    color: #5f7ae7;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #7e95eb;
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Raleway", sans-serif;
+}
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+#header {
+    vertical-align: middle;
+    transition: all 0.5s;
+    padding: 12px 15px;
+    background: #fff;
+    position: fixed;
+    width: 100%;
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+}
+
+#logo {
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: inline-flex;
+}
+
+#logo a,
+#logo a:hover {
+    color: #222222;
+    text-decoration: none;
+}
+
+
+/*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+
+nav {
+    padding: 0 50px;
+    float: right;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    padding: 0px 10px;
+
+}
+
+nav a,
+nav a:focus {
+    font-size: 15px;
+    font-weight: 400;
+    color: #555555;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+nav a i,
+nav a:focus i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+}
+
+nav a:hover,
+nav li:hover>a {
+    color: #5f7ae7;
+
+}
+
+nav li.active a {
+    border-bottom: 2px solid #5f7ae7;
+    color: #5f7ae7;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+nav .sign-up,
+nav .sign-up:focus {
+    background: #5f7ae7;
+    padding: 8px 25px;
+    border-radius: 50px;
+    color: #fff;
+
+}
+
+nav .sign-up:hover {
+    color: #fff;
+    text-decoration: none;
+    background: #7e95eb;
+}
+
+
+nav .sign-up a:hover,
+nav .sign-up a:visited {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    white-space: nowrap;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+
+nav .log-in a,
+nav .log-in:focus {
+    color: #5f7ae7;
+
+}
+
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+#footer {
+    background: #fff;
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+    padding: 30px 0;
+    color: #222222;
+    font-size: 14px;
+    text-align: center;
+}
+
+#footer .credits {
+    font-size: 13px;
+    padding-top: 5px;
+    color: #222222;
+}
+
+#footer .footer-links a {
+    color: #222222;
+    padding-left: 15px;
+}
+
+#footer .footer-links a:first-child {
+    padding-left: 0;
+}
+
+#footer .footer-links a:hover {
+    color: #5f7ae7;
+}
