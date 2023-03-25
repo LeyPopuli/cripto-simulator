@@ -2,8 +2,50 @@
 
 
 {% block contenido %}
+
+<div class="form-container">
+  <form id="purchase-form">
+    <label for="origin_currency">Origin currency</label>
+    <select name="origin_currency" id="origin_currency" required>
+      {% for value in all_currencies %}
+      <option value="{{ value }}">{{ value }}</option>
+      {% endfor %}
+    </select>
+    <br>
+
+    <label for="destination_currency">Destination currency</label>
+    <select name="destination_currency" id="destination_currency" required>
+      {% for value in all_currencies %}
+      <option value="{{ value }}">{{ value }}</option>
+      {% endfor %}
+    </select>
+    <br>
+
+    <label for="amount">Amount</label>
+    <input type="number" name="amount" id="amount" value="0.00" step="0.01" min="0" required>
+    <br>
+
+    <input class="btn" type="submit" value="Calculate">
+  </form>
+
+  <div id="hidden-form" style="display: none;">
+    <label for="newrate"> Unit price</label>
+    <input type="number" name="newrate" id="newrate" disabled>
+    <label for="newamount"> Available units</label>
+    <input type="number" name="newamount" id="newamount" disabled>
+    <br>
+
+    <button id="rejectbtn" onclick="location.reload()">Recalculate</button>
+    <input class="btn" id="acceptbtn" type="submit" value="Purchase">
+
+  </div>
+</div>
+
+
+
 {% endblock contenido %}
 
 
 {% block scripts %}
+<script src="/static/js/purchase-form.js"></script>
 {% endblock scripts %}

@@ -10,8 +10,10 @@ body {
 
 main {
     display: block;
-    padding-top: 60px;
+    padding-top: 100px;
+    padding-bottom: 50px;
     padding-left: 15px;
+    padding-right: 15px;
 }
 
 a {
@@ -148,12 +150,142 @@ nav .log-in:focus {
 
 
 /*--------------------------------------------------------------
+# Exchange form
+--------------------------------------------------------------*/
+
+/* Estilo para el formulario principal */
+
+#purchase-form {
+    background-color: #fff;
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#purchase-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 400;
+    color: #4e6e8e;
+}
+
+#purchase-form select,
+#purchase-form input[type="number"] {
+    border: 1px solid #c9d6df;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 14px;
+    color: #4e6e8e;
+    margin-bottom: 15px;
+}
+
+#purchase-form input[type="submit"] {
+    font-family: "Raleway", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 12px 32px;
+    border-radius: 50px;
+    transition: 0.3s;
+    line-height: 1;
+    color: #fff;
+    animation-delay: 0.8s;
+    margin-top: 6px;
+    border: 2px solid;
+    background-color: #5f7ae7;
+}
+
+#purchase-form input[type="submit"]:hover {
+    background: #7e95eb;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* Estilo para el formulario oculto */
+
+#hidden-form {
+    background-color: #fff;
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#hidden-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 400;
+    color: #4e6e8e;
+}
+
+#hidden-form input[type="number"] {
+    border: 1px solid #c9d6df;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 14px;
+    color: #4e6e8e;
+    margin-bottom: 15px;
+}
+
+#hidden-form #acceptbtn {
+    font-family: "Raleway", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 12px 32px;
+    border-radius: 50px;
+    transition: 0.3s;
+    line-height: 1;
+    color: #fff;
+    animation-delay: 0.8s;
+    margin-top: 6px;
+    border: 2px solid;
+    background-color: #61e7a1;
+}
+
+#hidden-form #acceptbtn:hover {
+    background: #a1ecc5;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#hidden-form #rejectbtn {
+    font-family: "Raleway", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 12px 32px;
+    border-radius: 50px;
+    transition: 0.3s;
+    line-height: 1;
+    color: #fff;
+    animation-delay: 0.8s;
+    margin-top: 6px;
+    border: 2px solid;
+    background-color: #e79393;
+}
+
+#hidden-form #rejectbtn:hover {
+    background: #eca1a1;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
 #footer {
     background: #fff;
     box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
-    padding: 30px 0;
+    padding: 15px 0;
     color: #222222;
     font-size: 14px;
     text-align: center;

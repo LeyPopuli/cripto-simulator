@@ -2,6 +2,12 @@ from flask import render_template
 
 from . import app
 
+from config import AVAILABLE_CURRENCIES, ACCOUNTING_CURRENCY
+from crypto.modelsext import CryptoModel
+
+ALL_CURRENCIES = AVAILABLE_CURRENCIES
+AVAILABLE_CURRENCIES.append(ACCOUNTING_CURRENCY)
+
 
 @app.route('/')
 def index():
@@ -10,7 +16,7 @@ def index():
 
 @app.route('/purchase')
 def purchase():
-    return render_template('purchase.html')
+    return render_template('purchase.html', all_currencies=ALL_CURRENCIES)
 
 
 @app.route('/status')
