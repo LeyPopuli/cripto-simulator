@@ -25,20 +25,20 @@
     <input type="number" name="amount" id="amount" value="0.00" step="0.01" min="0" required>
     <br>
 
-    <input class="btn" type="submit" value="Calculate">
+    <input class="btn" type="submit" value="Check it">
   </form>
 
-  <div id="hidden-form" style="display: none;">
+  <form id="hidden-form" style="display: none;">
     <label for="newrate"> Unit price</label>
     <input type="number" name="newrate" id="newrate" disabled>
-    <label for="newamount"> Available units</label>
+    <label for="newamount"> Target amount</label>
     <input type="number" name="newamount" id="newamount" disabled>
     <br>
 
-    <button id="rejectbtn" onclick="location.reload()">Recalculate</button>
-    <input class="btn" id="acceptbtn" type="submit" value="Purchase">
+    <button id="rejectbtn" onclick="location.reload()">No way</button>
+    <input class="btn" id="acceptbtn" type="submit" value="Boost it!">
 
-  </div>
+  </form>
 </div>
 
 

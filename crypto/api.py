@@ -1,11 +1,13 @@
+from datetime import datetime
 from flask import jsonify, request
 
 from . import app
-from config import RUTA_BBDD
+
 from crypto.modelsext import CryptoModel, APIError
+from crypto.models import DBManager
 
 
-@app.route('/api/v1/exchanges', methods=['POST'])
+@app.route('/api/v1/exchange', methods=['POST'])
 def calculate_exchange():
     try:
         json = request.get_json()
@@ -30,13 +32,15 @@ def calculate_exchange():
                     'status': 'error',
                     'message': inst.message
                 }
-        except:
+        except Exception as ex:
+            print(ex)
             status_code = 400
             result = {
                 'status': 'error',
                 'message': 'There is some incorrectly formatted data.'
             }
-    except:
+    except Exception as ex:
+        print(ex)
         status_code = 500
         result = {
             'status': 'error',
@@ -46,5 +50,47 @@ def calculate_exchange():
     return jsonify(result), status_code
 
 
+@app.route('/api/v1/transaction', methods=['POST'])
 def add_transaction():
-    pass
+    try:
+        json = request.get_json()
+        db = DBManager()
+        query = "INSERT INTO 'transaction' (date, time, origin_currency, origin_amount, destination_currency, destination_amount) VALUES (?, ?, ?, ?, ?, ?)"
+        date_time = datetime.now()
+        date = date_time.strftime('%d-%m-%Y')
+        time = date_time.strftime('%H:%M:%S')
+        int_amount = float(json.get(
+            'amount'))
+        int_target_amount = float(json.get('targetAmount'))
+
+        params = (date, time, json.get('originCurrency'), int_amount, json.get(
+            'destinationCurrency'), int_target_amount)
+        try:
+            run = db.run_query_with_params(query, params)
+            if run:
+                status_code = 201
+                result = {
+                    'status': 'success',
+                }
+            else:
+                status_code = 500
+                result = {
+                    'status': 'error',
+                    'message': 'Failed to insert transaction.'
+                }
+        except Exception as ex:
+            print(ex)
+            status_code = 500
+            result = {
+                'status': 'error',
+                'message': 'Failed to connect to database.'
+            }
+
+    except Exception as ex:
+        print(ex)
+        status_code = 500
+        result = {
+            'status': 'error',
+            'message': 'Unknown server error.'
+        }
+    return jsonify(result), status_code
