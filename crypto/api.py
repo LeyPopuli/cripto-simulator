@@ -14,30 +14,22 @@ def calculate_exchange():
         origin_currency = json.get('originCurrency')
         destination_currency = json.get('destinationCurrency')
         amount = json.get('amount')
+        new_exchange = CryptoModel(
+            origin_currency, destination_currency, amount)
         try:
-            new_exchange = CryptoModel(
-                origin_currency, destination_currency, amount)
-            try:
-                new_rate = new_exchange.consult_exchange_rate()
-                new_final_amount = new_exchange.calculate_final_amount()
-                status_code = 200
-                result = {
-                    'status': 'success',
-                    'newrate': new_rate,
-                    'newfinalamount': new_final_amount,
-                }
-            except APIError as inst:
-                status_code = 400
-                result = {
-                    'status': 'error',
-                    'message': inst.message
-                }
-        except Exception as ex:
-            print(ex)
+            new_rate = new_exchange.consult_exchange_rate()
+            new_final_amount = new_exchange.calculate_final_amount()
+            status_code = 200
+            result = {
+                'status': 'success',
+                'newrate': new_rate,
+                'newfinalamount': new_final_amount,
+            }
+        except APIError as inst:
             status_code = 400
             result = {
                 'status': 'error',
-                'message': 'There is some incorrectly formatted data.'
+                'message': inst.message
             }
     except Exception as ex:
         print(ex)
@@ -65,25 +57,17 @@ def add_transaction():
 
         params = (date, time, json.get('originCurrency'), int_amount, json.get(
             'destinationCurrency'), int_target_amount)
-        try:
-            run = db.run_query_with_params(query, params)
-            if run:
-                status_code = 201
-                result = {
-                    'status': 'success',
-                }
-            else:
-                status_code = 500
-                result = {
-                    'status': 'error',
-                    'message': 'Failed to insert transaction.'
-                }
-        except Exception as ex:
-            print(ex)
+        run = db.exec_with_params(query, params)
+        if run:
+            status_code = 201
+            result = {
+                'status': 'success',
+            }
+        else:
             status_code = 500
             result = {
                 'status': 'error',
-                'message': 'Failed to connect to database.'
+                'message': 'Failed to register the transaction.'
             }
 
     except Exception as ex:
@@ -93,4 +77,27 @@ def add_transaction():
             'status': 'error',
             'message': 'Unknown server error.'
         }
+    return jsonify(result), status_code
+
+
+@app.route('/api/v1/transaction', methods=['GET'])
+def show_transaction():
+    try:
+        db = DBManager()
+        query = "SELECT * FROM 'transaction'"
+        transactions = db.run_query(query)
+        result = {
+            "status": "success",
+            "results": transactions
+        }
+        status_code = 200
+
+    except Exception as ex:
+        print(ex)
+        result = {
+            "status": "error",
+            "message": 'Unknown server error.'
+        }
+        status_code = 500
+
     return jsonify(result), status_code

@@ -2,8 +2,27 @@
 
 
 {% block contenido %}
+<h3>Transactions</h3>
+
+<section class="transactions">
+  <table>
+    <thead>
+      <tr>
+        <th class="column-name">Date</th>
+        <th class="column-name">Time</th>
+        <th class="column-name">From</th>
+        <th class="column-name">Amount</th>
+        <th class="column-name">To</th>
+        <th class="column-name">Amount</th>
+        <th class="column-name">Unit price</th>
+      </tr>
+    </thead>
+    <tbody id="table-body">
+    </tbody>
+  </table>
+</section>
 {% endblock contenido %}
 
-
 {% block scripts %}
+<script src="/static/js/index.js"></script>
 {% endblock scripts %}

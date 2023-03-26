@@ -51,10 +51,9 @@ hiddenForm.addEventListener('submit', function (event) {
 });
 
 function getFormPurchaseData() {
-    const formData = new FormData(purchaseForm);
-    const originCurrency = formData.get('origin_currency');
-    const destinationCurrency = formData.get('destination_currency');
-    const amount = formData.get('amount');
+    const originCurrency = document.querySelector('#origin_currency').value;
+    const destinationCurrency = document.querySelector('#destination_currency').value;
+    const amount = document.querySelector('#amount').value;
     const data = {
         originCurrency,
         destinationCurrency,
@@ -74,5 +73,20 @@ function showCalculation(data) {
     hiddenNewrate.value = rateFormated;
     hiddenNewamount.value = finalAmountFormated;
 
+    disablePurchaseForm();
 }
 
+function disablePurchaseForm() {
+    const originCurrency = document.querySelector('#origin_currency');
+    const destinationCurrency = document.querySelector('#destination_currency');
+    const amount = document.querySelector('#amount');
+
+    originCurrency.setAttribute("disabled", "true");
+    destinationCurrency.setAttribute("disabled", "true");
+    amount.setAttribute("disabled", "true");
+}
+
+function reloadPage(event) {
+    event.preventDefault();
+    location.reload();
+}
