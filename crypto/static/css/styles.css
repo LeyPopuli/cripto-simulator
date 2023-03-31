@@ -1,6 +1,13 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: "Open Sans", sans-serif;
     color: #444444;
@@ -41,7 +48,7 @@ h6 {
 #header {
     vertical-align: middle;
     transition: all 0.5s;
-    padding: 20px 15px;
+    padding: 15px 15px 0px;
     background: #fff;
     position: fixed;
     width: 100%;
@@ -74,33 +81,22 @@ nav {
     float: right;
 }
 
-nav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
 nav li {
     display: inline-block;
-    padding: 0px 10px;
-
 }
 
 nav a,
 nav a:focus {
     font-size: 15px;
+    margin: 0px 10px;
     font-weight: 400;
     color: #555555;
     white-space: nowrap;
     transition: 0.3s;
+    display: block;
+    height: 36px;
 }
 
-nav a i,
-nav a:focus i {
-    font-size: 12px;
-    line-height: 0;
-    margin-left: 5px;
-}
 
 nav a:hover,
 nav li:hover>a {
@@ -115,30 +111,25 @@ nav li.active a {
     pointer-events: none;
 }
 
-nav .sign-up,
-nav .sign-up:focus,
-nav .sign-up .activate {
+nav .sign-up a,
+nav .sign-up.active a {
     background: #5f7ae7;
     padding: 8px 25px;
     border-radius: 50px;
     color: #fff;
-}
-
-nav .sign-up:hover {
-    color: #fff;
-    text-decoration: none;
-    background: #7e95eb;
+    border-bottom: none !important;
+    font-weight: 400;
 }
 
 
 nav .sign-up a:hover,
-nav .sign-up a:visited,
 nav .sign-up a:focus {
     color: #fff;
     font-size: 15px;
     font-weight: 400;
     white-space: nowrap;
     transition: 0.3s;
+    background: #7e95eb;
 }
 
 
@@ -153,7 +144,7 @@ nav .log-in:focus {
 # Exchange form
 --------------------------------------------------------------*/
 
-/* Estilo para el formulario principal */
+/* Purchase form */
 
 #purchase-form {
     background-color: #fff;
@@ -205,7 +196,7 @@ nav .log-in:focus {
 }
 
 
-/* Estilo para el formulario oculto */
+/* Hidded form */
 
 #hidden-form {
     background-color: #fff;
@@ -285,14 +276,18 @@ nav .log-in:focus {
 
 /* Main */
 
-.transactions {
-    margin-top: 20px;
+#transactions-title {
+    margin-bottom: 20px;
+    margin-left: 10%;
 }
 
 table {
     border-collapse: collapse;
-    width: 100%;
     margin-top: 20px;
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 th,
@@ -325,6 +320,7 @@ td a:hover {
 
 
 /* Spinner / loader / overlay */
+
 .overlay {
     position: absolute;
     top: 0;
@@ -342,13 +338,23 @@ td a:hover {
     display: none;
 }
 
-.doble-anillo {
+.double-ring {
     width: 64px;
     height: 64px;
     border: 6px solid white;
     border-radius: 50%;
     border-color: white transparent;
-    animation: giro 1s linear infinite;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /*--------------------------------------------------------------

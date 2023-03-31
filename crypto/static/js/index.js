@@ -28,15 +28,26 @@ function showTransaction(response) {
     for (let i = 0; i < transactions.length; i = i + 1) {
         const transaction = transactions[i];
 
+        const options = {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        };
+
+        const formater = new Intl.NumberFormat('es-ES', options);
+        const destinationCurrencyFormated = formater.format(transaction.destination_amount);
+        const originCurrencyFormated = formater.format(transaction.origin_amount);
+        const unitPriceFormated = formater.format(transaction.origin_amount / transaction.destination_amount)
+
+
         html = html + `
             <tr>
                 <td>${transaction.date}</td>
                 <td>${transaction.time}</td>
                 <td>${transaction.origin_currency}</td>
-                <td>${transaction.origin_amount}</td>
+                <td>${originCurrencyFormated}</td>
                 <td>${transaction.destination_currency}</td>
-                <td>${transaction.destination_amount}</td>
-                <td>Aquí pondré cálculo</td>
+                <td>${destinationCurrencyFormated}</td>
+                <td>${unitPriceFormated}</td>
             </tr>
             `;
     };
