@@ -3,6 +3,7 @@ from flask import jsonify, request
 
 from . import app
 
+from config import *
 from crypto.modelsext import CryptoModel, APIError
 from crypto.models import DBManager
 
@@ -89,6 +90,36 @@ def show_transaction():
         result = {
             "status": "success",
             "results": transactions
+        }
+        status_code = 200
+
+    except Exception as ex:
+        print(ex)
+        result = {
+            "status": "error",
+            "message": 'Unknown server error.'
+        }
+        status_code = 500
+
+    return jsonify(result), status_code
+
+
+@app.route('/api/v1/status', methods=['GET'])
+def check_status():
+    try:
+        db = DBManager()
+        query = "SELECT * FROM 'transaction'"
+        transactions = db.run_query(query)
+        investment_sum = 0
+        for transaction in transactions:
+            if transaction.get("destination_currency") == ACCOUNTING_CURRENCY:
+                investment_sum += transaction.get("destination_amount", 0)
+            if transaction.get("origin_currency") == ACCOUNTING_CURRENCY:
+                investment_sum -= transaction.get("origin_amount", 0)
+
+        result = {
+            "status": "success",
+            "investment": investment_sum
         }
         status_code = 200
 

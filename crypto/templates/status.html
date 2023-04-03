@@ -2,8 +2,19 @@
 
 
 {% block contenido %}
-{% endblock contenido %}
+
+<div class="form-container">
+  <form id="status-form">
+    <h1 id="status-title">Status</h1>
+    <label for="investment"> Investment</label>
+    <input type="number" name="investment" id="investment" disabled>
+    <label for="currentvalue"> Current value</label>
+    <input type="number" name="currentvalue" id="currentvalue" disabled>
+  </form>
+
+  {% endblock contenido %}
 
 
-{% block scripts %}
-{% endblock scripts %}
+  {% block scripts %}
+  <script src="/static/js/status.js"></script>
+  {% endblock scripts %}

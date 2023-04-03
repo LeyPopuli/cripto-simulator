@@ -27,16 +27,12 @@ class DBManager:
 
         return result
 
-    def run_query(self, query, params=None):
+    def run_query(self, query):
         connection = sqlite3.connect(self.path)
         cursor = connection.cursor()
 
         try:
-            if params == None:
-                cursor.execute(query)
-
-            else:
-                cursor.execute(query, params)
+            cursor.execute(query)
 
             data = cursor.fetchall()
 
