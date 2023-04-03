@@ -110,18 +110,61 @@ def check_status():
         db = DBManager()
         query = "SELECT * FROM 'transaction'"
         transactions = db.run_query(query)
-        investment_sum = 0
-        for transaction in transactions:
-            if transaction.get("destination_currency") == ACCOUNTING_CURRENCY:
-                investment_sum += transaction.get("destination_amount", 0)
-            if transaction.get("origin_currency") == ACCOUNTING_CURRENCY:
-                investment_sum -= transaction.get("origin_amount", 0)
 
-        result = {
-            "status": "success",
-            "investment": investment_sum
-        }
-        status_code = 200
+        destination_amounts = {}
+        origin_amounts = {}
+
+        for transaction in transactions:
+            dest_currency = transaction.get('destination_currency')
+            dest_amount = transaction.get('destination_amount')
+            if dest_currency not in destination_amounts:
+                destination_amounts[dest_currency] = 0
+            destination_amounts[dest_currency] += dest_amount
+
+            orig_currency = transaction.get('origin_currency')
+            orig_amount = transaction.get('origin_amount')
+            if orig_currency not in origin_amounts:
+                origin_amounts[orig_currency] = 0
+            origin_amounts[orig_currency] += orig_amount
+
+        totals = {}
+
+        for currency in destination_amounts:
+            totals[currency] = destination_amounts.get(currency, 0) - \
+                origin_amounts.get(currency, 0)
+            for currency in origin_amounts:
+                if currency not in totals:
+                    totals[currency] = destination_amounts.get(currency, 0) - \
+                        origin_amounts.get(currency, 0)
+
+        invesment = origin_amounts.get(ACCOUNTING_CURRENCY, 0)
+        currency_acc_balance = totals.get(ACCOUNTING_CURRENCY, 0)
+        crypto_balance = 0
+        try:
+            for currency in totals:
+                if currency != ACCOUNTING_CURRENCY:
+                    new_exchange = CryptoModel(
+                        currency, ACCOUNTING_CURRENCY, totals.get(currency))
+                    new_rate = new_exchange.consult_exchange_rate()
+                    new_final_amount = new_exchange.calculate_final_amount()
+                    crypto_balance += new_final_amount
+                    print(crypto_balance)
+
+            current_value = invesment + currency_acc_balance + crypto_balance
+
+            result = {
+                "status": "success",
+                "currentValue": current_value
+            }
+
+            status_code = 200
+
+        except APIError as inst:
+            status_code = 400
+            result = {
+                'status': 'error',
+                'message': inst.message
+            }
 
     except Exception as ex:
         print(ex)
