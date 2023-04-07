@@ -27,6 +27,7 @@ def calculate_exchange():
                 'newfinalamount': new_final_amount,
             }
         except APIError as inst:
+            print(inst)
             status_code = 400
             result = {
                 'status': 'error',
@@ -137,7 +138,7 @@ def check_status():
                     totals[currency] = destination_amounts.get(currency, 0) - \
                         origin_amounts.get(currency, 0)
 
-        invesment = origin_amounts.get(ACCOUNTING_CURRENCY, 0)
+        investment = origin_amounts.get(ACCOUNTING_CURRENCY, 0)
         currency_acc_balance = totals.get(ACCOUNTING_CURRENCY, 0)
         crypto_balance = 0
         try:
@@ -147,19 +148,22 @@ def check_status():
                         currency, ACCOUNTING_CURRENCY, totals.get(currency))
                     new_rate = new_exchange.consult_exchange_rate()
                     new_final_amount = new_exchange.calculate_final_amount()
+                    print(new_final_amount)
                     crypto_balance += new_final_amount
-                    print(crypto_balance)
 
-            current_value = invesment + currency_acc_balance + crypto_balance
+            current_value = investment + currency_acc_balance + crypto_balance
 
             result = {
                 "status": "success",
+                "investment": investment,
+                "totals": totals,
                 "currentValue": current_value
             }
 
             status_code = 200
 
         except APIError as inst:
+            print(inst)
             status_code = 400
             result = {
                 'status': 'error',

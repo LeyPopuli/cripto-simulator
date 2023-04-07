@@ -15,13 +15,17 @@ function getStatus() {
             }
         })
         .then(response => showStatus(response))
-        .catch(error => window.alert("An error occurred, try again later."));
+        .catch(error => showToast('ERROR', 'An error ocurred, try again later.'));
 };
 
 function showStatus(response) {
     const calculatedInvestment = response.investment;
     const investment = document.querySelector('#investment');
     investment.value = calculatedInvestment.toFixed(2);
+
+    const calculatedCurrentValue = response.currentValue;
+    const currentValue = document.querySelector('#currentvalue');
+    currentValue.value = calculatedCurrentValue.toFixed(2);
 };
 
 window.onload = function () {

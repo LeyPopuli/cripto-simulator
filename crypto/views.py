@@ -3,7 +3,6 @@ from flask import render_template
 from . import app
 
 from config import *
-from crypto.modelsext import CryptoModel
 
 ALL_CURRENCIES = AVAILABLE_CURRENCIES
 AVAILABLE_CURRENCIES.append(ACCOUNTING_CURRENCY)

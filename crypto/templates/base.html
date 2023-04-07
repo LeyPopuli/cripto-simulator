@@ -59,6 +59,16 @@
     {% block contenido %}
     {% endblock contenido %}
 
+    <div id="toast" class="toast">
+      <div class="toast-header">
+        <strong class="mr-auto">Toast title</strong>
+        <span class="close" data-dismiss="toast">&times;</span>
+      </div>
+      <div class="toast-body">
+        Toast description
+      </div>
+    </div>
+
   </main>
 
   <footer id="footer">
@@ -72,6 +82,7 @@
 
   {% block scripts %}
   {% endblock scripts %}
+  <script src="/static/js/crypto.js"></script>
 
 </body>
 
