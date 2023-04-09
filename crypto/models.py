@@ -18,7 +18,7 @@ class DBManager:
                     'CREATE TABLE IF NOT EXISTS "transaction" ("id_transaction"	INTEGER NOT NULL UNIQUE, "date"	TEXT NOT NULL, "time"	TEXT NOT NULL, "origin_currency"	TEXT NOT NULL, "origin_amount"	REAL NOT NULL, "destination_currency"	TEXT NOT NULL, "destination_amount"	REAL NOT NULL, PRIMARY KEY("id_transaction" AUTOINCREMENT));')
 
                 connection.commit()
-                print("Table created successfully.")
+                print("DB ready.")
 
             except Exception as ex:
                 print(ex)

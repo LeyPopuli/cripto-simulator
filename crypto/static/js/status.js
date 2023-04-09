@@ -1,7 +1,7 @@
 const statusForm = document.querySelector('#status-form');
 
 function getStatus() {
-    fetch('http://127.0.0.1:5000/api/v1/status', {
+    fetch('http://127.0.0.1:5000/api/v1/status?type=status', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -28,6 +28,6 @@ function showStatus(response) {
     currentValue.value = calculatedCurrentValue.toFixed(2);
 };
 
-window.onload = function () {
+window.addEventListener("load", function () {
     getStatus();
-};
+});

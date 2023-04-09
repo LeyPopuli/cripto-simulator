@@ -75,8 +75,8 @@ function showTransaction(response) {
 
 }
 
-window.onload = function () {
+window.addEventListener("load", function () {
     spinner = document.querySelector('#spinner');
 
     getTransactions();
-};
+});

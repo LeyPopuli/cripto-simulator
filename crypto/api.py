@@ -107,6 +107,8 @@ def show_transaction():
 
 @app.route('/api/v1/status', methods=['GET'])
 def check_status():
+    args = request.args
+    request_type = args.get("type", default="wallet", type=str)
     try:
         db = DBManager()
         query = "SELECT * FROM 'transaction'"
@@ -130,6 +132,12 @@ def check_status():
 
         totals = {}
 
+        result = {
+            "status": "success",
+        }
+
+        status_code = 200
+
         for currency in destination_amounts:
             totals[currency] = destination_amounts.get(currency, 0) - \
                 origin_amounts.get(currency, 0)
@@ -138,37 +146,34 @@ def check_status():
                     totals[currency] = destination_amounts.get(currency, 0) - \
                         origin_amounts.get(currency, 0)
 
-        investment = origin_amounts.get(ACCOUNTING_CURRENCY, 0)
-        currency_acc_balance = totals.get(ACCOUNTING_CURRENCY, 0)
-        crypto_balance = 0
-        try:
-            for currency in totals:
-                if currency != ACCOUNTING_CURRENCY:
-                    new_exchange = CryptoModel(
-                        currency, ACCOUNTING_CURRENCY, totals.get(currency))
-                    new_rate = new_exchange.consult_exchange_rate()
-                    new_final_amount = new_exchange.calculate_final_amount()
-                    print(new_final_amount)
-                    crypto_balance += new_final_amount
+        result["totals"] = totals
 
-            current_value = investment + currency_acc_balance + crypto_balance
+        if request_type != "wallet":
+            investment = origin_amounts.get(ACCOUNTING_CURRENCY, 0)
+            currency_acc_balance = totals.get(ACCOUNTING_CURRENCY, 0)
+            crypto_balance = 0
+            try:
+                for currency in totals:
+                    if currency != ACCOUNTING_CURRENCY:
+                        new_exchange = CryptoModel(
+                            currency, ACCOUNTING_CURRENCY, totals.get(currency))
+                        new_rate = new_exchange.consult_exchange_rate()
+                        new_final_amount = new_exchange.calculate_final_amount()
+                        print(new_final_amount)
+                        crypto_balance += new_final_amount
 
-            result = {
-                "status": "success",
-                "investment": investment,
-                "totals": totals,
-                "currentValue": current_value
-            }
+                current_value = investment + currency_acc_balance + crypto_balance
 
-            status_code = 200
+                result["investment"] = investment
+                result["currentValue"] = current_value
 
-        except APIError as inst:
-            print(inst)
-            status_code = 400
-            result = {
-                'status': 'error',
-                'message': inst.message
-            }
+            except APIError as inst:
+                print(inst)
+                status_code = 400
+                result = {
+                    'status': 'error',
+                    'message': inst.message
+                }
 
     except Exception as ex:
         print(ex)
