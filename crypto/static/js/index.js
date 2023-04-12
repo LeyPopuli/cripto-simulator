@@ -37,21 +37,15 @@ function showTransaction(response) {
         for (let i = 0; i < transactions.length; i = i + 1) {
             const transaction = transactions[i];
 
-            const optionsFixedTwo = {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            };
-
-            const optionsFixedSix = {
-                minimumFractionDigits: 2,
+            const optionsFixed = {
+                minimumFractionDigits: 6,
                 maximumFractionDigits: 6
             };
 
-            const formaterFixedTwo = new Intl.NumberFormat('es-ES', optionsFixedTwo);
-            const formaterFixedSix = new Intl.NumberFormat('es-ES', optionsFixedSix);
-            const destinationCurrencyFormated = formaterFixedTwo.format(transaction.destination_amount);
-            const originCurrencyFormated = formaterFixedTwo.format(transaction.origin_amount);
-            const unitPriceFormated = formaterFixedSix.format(transaction.origin_amount / transaction.destination_amount)
+            const formater = new Intl.NumberFormat('es-ES', optionsFixed);
+            const destinationCurrencyFormated = formater.format(transaction.destination_amount);
+            const originCurrencyFormated = formater.format(transaction.origin_amount);
+            const unitPriceFormated = formater.format(transaction.origin_amount / transaction.destination_amount)
 
 
             html = html + `

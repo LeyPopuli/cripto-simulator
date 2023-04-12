@@ -49,11 +49,17 @@ function showWallet(response) {
     const totals = response.totals;
     let html = '';
 
-    for (let property in totals) {
-        if (property != "EUR") {
-            let content = (property + " " + totals[property])
-            console.log(content)
-            html = html + `<a href="#">${content}</a>`
+    const optionsFixed = {
+        minimumFractionDigits: 6,
+        maximumFractionDigits: 6
+    };
+
+    const formater = new Intl.NumberFormat('es-ES', optionsFixed);
+
+    for (let currency in totals) {
+        if (currency != response.accountingCurrency) {
+            currencyFormated = formater.format(totals[currency])
+            html = html + `<a href="#"><strong>${currency}</strong> ${currencyFormated}</a>`
         }
     }
 

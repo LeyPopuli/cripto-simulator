@@ -8,6 +8,10 @@ from crypto.modelsext import CryptoModel, APIError
 from crypto.models import DBManager
 
 
+ALL_CURRENCIES = list(AVAILABLE_CURRENCIES)
+ALL_CURRENCIES.append(ACCOUNTING_CURRENCY)
+
+
 @app.route('/api/v1/exchange', methods=['POST'])
 def calculate_exchange():
     try:
@@ -134,6 +138,8 @@ def check_status():
 
         result = {
             "status": "success",
+            "accountingCurrency": ACCOUNTING_CURRENCY,
+            "allCurrencies": ALL_CURRENCIES,
         }
 
         status_code = 200
@@ -151,7 +157,7 @@ def check_status():
         if request_type != "wallet":
             investment = origin_amounts.get(ACCOUNTING_CURRENCY, 0)
             currency_acc_balance = totals.get(ACCOUNTING_CURRENCY, 0)
-            crypto_balance = 0
+            crypto_balance = {}
             try:
                 for currency in totals:
                     if currency != ACCOUNTING_CURRENCY:
@@ -159,13 +165,14 @@ def check_status():
                             currency, ACCOUNTING_CURRENCY, totals.get(currency))
                         new_rate = new_exchange.consult_exchange_rate()
                         new_final_amount = new_exchange.calculate_final_amount()
-                        print(new_final_amount)
-                        crypto_balance += new_final_amount
+                        crypto_balance[currency] = new_final_amount
 
-                current_value = investment + currency_acc_balance + crypto_balance
+                current_value = investment + currency_acc_balance + \
+                    sum(crypto_balance.values())
 
                 result["investment"] = investment
                 result["currentValue"] = current_value
+                result["cryptoBalance"] = crypto_balance
 
             except APIError as inst:
                 print(inst)

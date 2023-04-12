@@ -4,9 +4,6 @@ from . import app
 
 from config import *
 
-ALL_CURRENCIES = AVAILABLE_CURRENCIES
-AVAILABLE_CURRENCIES.append(ACCOUNTING_CURRENCY)
-
 
 @app.route('/')
 def index():
@@ -15,7 +12,7 @@ def index():
 
 @app.route('/purchase')
 def purchase():
-    return render_template('purchase.html', all_currencies=ALL_CURRENCIES)
+    return render_template('purchase.html')
 
 
 @app.route('/status')

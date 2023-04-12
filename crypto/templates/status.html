@@ -3,7 +3,7 @@
 
 {% block contenido %}
 
-<div class="form-container">
+<div class="status-container">
   <form id="status-form">
     <h1 id="status-title">Status</h1>
     <label for="investment"> Investment</label>
@@ -11,10 +11,15 @@
     <label for="currentvalue"> Current value</label>
     <input type="number" name="currentvalue" id="currentvalue" disabled>
   </form>
+</div>
 
-  {% endblock contenido %}
+<div id="chart"></div>
+
+{% endblock contenido %}
 
 
-  {% block scripts %}
-  <script src="/static/js/status.js"></script>
-  {% endblock scripts %}
+{% block scripts %}
+<script src="/static/js/status.js"></script>
+<!-- Highcharts -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+{% endblock scripts %}

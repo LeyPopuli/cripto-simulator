@@ -192,7 +192,7 @@ nav .log-in:focus {
 
 }
 
-/* Dropdown menu */
+/* Wallet menu */
 
 .dropbtn {
     background-color: #f2f2f2;
@@ -219,7 +219,7 @@ nav .log-in:focus {
     display: none;
     position: absolute;
     z-index: 1;
-    min-width: 160px;
+    width: max-content;
     border-radius: 4px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     background-color: #f9f9f9;
@@ -489,6 +489,7 @@ td a {
 #status-form label {
     display: block;
     margin-bottom: 10px;
+    margin-top: 10px;
     font-weight: 400;
     color: #4e6e8e;
 }
@@ -497,10 +498,12 @@ td a {
 #status-form input[type="number"] {
     border: 1px solid #c9d6df;
     border-radius: 3px;
-    padding: 5px;
+    padding: 10px;
     font-size: 14px;
     color: #4e6e8e;
     margin-bottom: 15px;
+    font-size: 16px;
+    width: 20%;
 }
 
 #status-form input[type="submit"] {
@@ -526,6 +529,9 @@ td a {
     text-decoration: none;
     cursor: pointer;
 }
+
+/* Chart */
+
 
 /*--------------------------------------------------------------
 # Footer

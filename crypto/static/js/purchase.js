@@ -1,3 +1,55 @@
+const originCurrencies = document.querySelector('#origin_currency');
+const destinationCurrencies = document.querySelector('#destination_currency');
+
+function getCurrencies() {
+    fetch('http://127.0.0.1:5000/api/v1/status?type=wallet', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw response;
+            }
+        })
+        .then(response => {
+            showOriginCurrencies(response);
+            showDestinationCurrencies(response);
+        }).catch(error => showToast('ERROR', 'An error ocurred loading currencies, try again later.'));
+};
+
+function showOriginCurrencies(response) {
+    let currencies = [];
+    let html = '';
+
+    for (let currency in response.totals) {
+        currencies.push(currency)
+    }
+    if (currencies.indexOf(response.accountingCurrency) == -1) {
+        html += `<option value="${response.accountingCurrency}">${response.accountingCurrency}</option>`;
+    }
+    for (let currency in currencies) {
+        html += `<option value="${currencies[currency]}">${currencies[currency]}</option>`;
+    }
+
+    originCurrencies.innerHTML = html;
+};
+
+function showDestinationCurrencies(response) {
+    let html = '';
+    const currencies = response.allCurrencies;
+
+    for (let currency in response.allCurrencies) {
+        html += `<option value="${currencies[currency]}">${currencies[currency]}</option>`;
+    }
+
+    destinationCurrencies.innerHTML = html;
+};
+
+
 const purchaseForm = document.querySelector('#purchase-form');
 
 purchaseForm.addEventListener('submit', function (event) {
@@ -56,8 +108,11 @@ hiddenForm.addEventListener('submit', function (event) {
         .then(data => {
             showToast('SUCCESS', 'Transaction saved.');
         })
-        .then(defaultPurchaseForm())
-        .catch(error => showToast('ERROR', 'An error ocurred, try again later.'));
+        .then(() => {
+            defaultPurchaseForm();
+            getContent();
+            getCurrencies();
+        }).catch(error => showToast('ERROR', 'An error ocurred, try again later.'));
 });
 
 const destinationCurrencySelect = document.getElementById('destination_currency');
@@ -146,9 +201,7 @@ function defaultPurchaseForm() {
     destinationCurrency.removeAttribute("disabled");
     amount.removeAttribute("disabled");
 
-    originCurrency.selectedIndex = 0;
-    destinationCurrency.selectedIndex = 0;
-    amount.value = 0.00;
+    amount.value = 0;
 
     const hiddenform = document.querySelector('#hidden-form');
     hiddenform.style.display = 'none';
@@ -158,3 +211,8 @@ function reloadPage(event) {
     event.preventDefault();
     defaultPurchaseForm();
 }
+
+window.addEventListener("load", function () {
+    getCurrencies();
+    defaultPurchaseForm();
+});
