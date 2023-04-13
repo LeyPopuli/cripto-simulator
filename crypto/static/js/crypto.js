@@ -59,7 +59,8 @@ function showWallet(response) {
     for (let currency in totals) {
         if (currency != response.accountingCurrency) {
             currencyFormated = formater.format(totals[currency])
-            html = html + `<a href="#"><strong>${currency}</strong> ${currencyFormated}</a>`
+            const purchaseUrl = `http://127.0.0.1:5000/purchase?originCurrency=${currency}&amount=${totals[currency]}`;
+            html = html + `<a href="${purchaseUrl}"><strong>${currency}</strong> ${currencyFormated}</a>`
         }
     }
 

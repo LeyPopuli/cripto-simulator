@@ -1,5 +1,6 @@
 const originCurrencies = document.querySelector('#origin_currency');
 const destinationCurrencies = document.querySelector('#destination_currency');
+const amount = document.querySelector('#amount');
 let availableBalance = {};
 
 function getCurrencies() {
@@ -21,6 +22,7 @@ function getCurrencies() {
             accountingCurrency = response.accountingCurrency;
             showOriginCurrencies(response);
             showDestinationCurrencies(response);
+            defaultPurchaseForm()
         }).catch(error => showToast('ERROR', 'An error ocurred loading currencies, try again later.'));
 };
 
@@ -81,8 +83,8 @@ purchaseForm.addEventListener('submit', function (event) {
 });
 
 purchaseForm.addEventListener('change', function (event) {
-    destinationCurrencySelect.classList.remove('error');
-    originCurrencySelect.classList.remove('error');
+    destinationCurrencies.classList.remove('error');
+    originCurrencies.classList.remove('error');
     amount.classList.remove('error');
     checkButton.disabled = false;
 });
@@ -118,25 +120,22 @@ hiddenForm.addEventListener('submit', function (event) {
         }).catch(error => showToast('ERROR', 'An error ocurred, try again later.'));
 });
 
-const destinationCurrencySelect = document.getElementById('destination_currency');
-const originCurrencySelect = document.getElementById('origin_currency');
-const amount = document.querySelector('#amount');
 const checkButton = document.getElementById('check-button');
 
 
 function validateData() {
-    const originCurrencyValue = originCurrencySelect.value;
-    const destinationCurrencyValue = destinationCurrencySelect.value;
+    const originCurrencyValue = originCurrencies.value;
+    const destinationCurrencyValue = destinationCurrencies.value;
     const amountValue = Number(amount.value);
 
     if (originCurrencyValue === destinationCurrencyValue) {
-        destinationCurrencySelect.classList.add('error');
-        originCurrencySelect.classList.add('error');
+        destinationCurrencies.classList.add('error');
+        originCurrencies.classList.add('error');
         showToast('WARNING', 'Please select different currencies for origin and destination.');
         return false;
     } else {
-        destinationCurrencySelect.classList.remove('error');
-        originCurrencySelect.classList.remove('error');
+        destinationCurrencies.classList.remove('error');
+        originCurrencies.classList.remove('error');
         if (amountValue <= 0) {
             amount.classList.add('error');
             showToast('WARNING', 'Please select a positive amount > 0.');
@@ -190,29 +189,28 @@ function showCalculation(data) {
 }
 
 function disablePurchaseForm() {
-    const originCurrency = document.querySelector('#origin_currency');
-    const destinationCurrency = document.querySelector('#destination_currency');
-    const amount = document.querySelector('#amount');
-
-    originCurrency.setAttribute("disabled", "true");
-    destinationCurrency.setAttribute("disabled", "true");
+    originCurrencies.setAttribute("disabled", "true");
+    destinationCurrencies.setAttribute("disabled", "true");
     amount.setAttribute("disabled", "true");
 }
 
 function defaultPurchaseForm() {
-    const originCurrency = document.querySelector('#origin_currency');
-    const destinationCurrency = document.querySelector('#destination_currency');
-    const amount = document.querySelector('#amount');
-
-    originCurrency.removeAttribute("disabled");
-    destinationCurrency.removeAttribute("disabled");
+    originCurrencies.removeAttribute("disabled");
+    destinationCurrencies.removeAttribute("disabled");
     amount.removeAttribute("disabled");
 
-    amount.value = 0;
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
 
-    const hiddenform = document.querySelector('#hidden-form');
-    hiddenform.style.display = 'none';
-}
+    if (params.originCurrency) {
+        originCurrencies.value = params.originCurrency;
+    }
+    if (params.amount) {
+        amount.value = params.amount;
+    }
+
+    hiddenForm.style.display = "none";
+};
 
 function reloadPage(event) {
     event.preventDefault();
