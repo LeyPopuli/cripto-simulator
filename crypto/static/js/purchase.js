@@ -1,5 +1,6 @@
 const originCurrencies = document.querySelector('#origin_currency');
 const destinationCurrencies = document.querySelector('#destination_currency');
+let availableBalance = {};
 
 function getCurrencies() {
     fetch('http://127.0.0.1:5000/api/v1/status?type=wallet', {
@@ -16,6 +17,8 @@ function getCurrencies() {
             }
         })
         .then(response => {
+            availableBalance = response.totals;
+            accountingCurrency = response.accountingCurrency;
             showOriginCurrencies(response);
             showDestinationCurrencies(response);
         }).catch(error => showToast('ERROR', 'An error ocurred loading currencies, try again later.'));
@@ -121,9 +124,10 @@ const amount = document.querySelector('#amount');
 const checkButton = document.getElementById('check-button');
 
 
-function validateCurrencies() {
+function validateData() {
     const originCurrencyValue = originCurrencySelect.value;
     const destinationCurrencyValue = destinationCurrencySelect.value;
+    const amountValue = Number(amount.value);
 
     if (originCurrencyValue === destinationCurrencyValue) {
         destinationCurrencySelect.classList.add('error');
@@ -133,12 +137,15 @@ function validateCurrencies() {
     } else {
         destinationCurrencySelect.classList.remove('error');
         originCurrencySelect.classList.remove('error');
-        if (amount.value <= 0) {
+        if (amountValue <= 0) {
             amount.classList.add('error');
             showToast('WARNING', 'Please select a positive amount > 0.');
             return false;
-        }
-        else {
+        } else if (amountValue > availableBalance[originCurrencyValue] && originCurrencyValue != accountingCurrency) {
+            amount.classList.add('error');
+            showToast('WARNING', 'Amount is greater than available balance.');
+            return false;
+        } else {
             amount.classList.remove('error');
             return true;
         }
@@ -147,7 +154,7 @@ function validateCurrencies() {
 
 function validateForm() {
 
-    isValid = validateCurrencies();
+    isValid = validateData();
     if (isValid) {
         checkButton.disabled = false;
     } else {
