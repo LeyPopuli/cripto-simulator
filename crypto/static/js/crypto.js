@@ -1,6 +1,5 @@
-const toastEl = document.getElementById('toast');
-
 function showToast(type, message) {
+    const toastEl = document.getElementById('toast');
     const titleEl = toastEl.querySelector('.toast-header strong');
     const messageEl = toastEl.querySelector('.toast-body');
 
@@ -23,6 +22,11 @@ function showToast(type, message) {
         toastEl.classList.remove('show');
 
     }, 5000);
+}
+
+function closeToast() {
+    const toastEl = document.getElementById('toast');
+    toastEl.classList.remove('show');
 }
 
 const walletContent = document.querySelector('#wallet-content');

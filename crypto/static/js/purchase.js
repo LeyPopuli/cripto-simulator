@@ -22,7 +22,6 @@ function getCurrencies() {
             accountingCurrency = response.accountingCurrency;
             showOriginCurrencies(response);
             showDestinationCurrencies(response);
-            defaultPurchaseForm()
         }).catch(error => showToast('ERROR', 'An error ocurred loading currencies, try again later.'));
 };
 
@@ -41,6 +40,16 @@ function showOriginCurrencies(response) {
     }
 
     originCurrencies.innerHTML = html;
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+
+    if (params.originCurrency) {
+        const selectedCurrency = params.originCurrency;
+        if (currencies.indexOf(selectedCurrency) != -1) {
+            originCurrencies.value = selectedCurrency
+        }
+        amount.value = response.totals[selectedCurrency];
+    }
 };
 
 function showDestinationCurrencies(response) {
@@ -116,7 +125,6 @@ hiddenForm.addEventListener('submit', function (event) {
         .then(() => {
             defaultPurchaseForm();
             getContent();
-            getCurrencies();
         }).catch(error => showToast('ERROR', 'An error ocurred, try again later.'));
 });
 
@@ -198,17 +206,7 @@ function defaultPurchaseForm() {
     originCurrencies.removeAttribute("disabled");
     destinationCurrencies.removeAttribute("disabled");
     amount.removeAttribute("disabled");
-
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-
-    if (params.originCurrency) {
-        originCurrencies.value = params.originCurrency;
-    }
-    if (params.amount) {
-        amount.value = params.amount;
-    }
-
+    getCurrencies();
     hiddenForm.style.display = "none";
 };
 
@@ -218,6 +216,5 @@ function reloadPage(event) {
 }
 
 window.addEventListener("load", function () {
-    getCurrencies();
     defaultPurchaseForm();
 });

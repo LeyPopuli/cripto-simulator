@@ -106,6 +106,7 @@ h1 {
     position: fixed;
     width: 100%;
     box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
 }
 
 #logo {
@@ -132,6 +133,7 @@ h1 {
 nav {
     padding: 0 50px;
     float: right;
+    z-index: 100;
 }
 
 nav li {
@@ -439,7 +441,7 @@ td a {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, .5);
-    z-index: 9999;
+    z-index: 99999;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -529,9 +531,6 @@ td a {
     text-decoration: none;
     cursor: pointer;
 }
-
-/* Chart */
-
 
 /*--------------------------------------------------------------
 # Footer
