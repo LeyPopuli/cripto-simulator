@@ -30,7 +30,9 @@ function showOriginCurrencies(response) {
     let html = '';
 
     for (let currency in response.totals) {
-        currencies.push(currency)
+        if (response.totals[currency] > 0) {
+            currencies.push(currency)
+        }
     }
     if (currencies.indexOf(response.accountingCurrency) == -1) {
         html += `<option value="${response.accountingCurrency}">${response.accountingCurrency}</option>`;

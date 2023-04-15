@@ -160,7 +160,7 @@ def check_status():
             crypto_balance = {}
             try:
                 for currency in totals:
-                    if currency != ACCOUNTING_CURRENCY:
+                    if currency != ACCOUNTING_CURRENCY and totals[currency] > 0:
                         new_exchange = CryptoModel(
                             currency, ACCOUNTING_CURRENCY, totals.get(currency))
                         new_rate = new_exchange.consult_exchange_rate()

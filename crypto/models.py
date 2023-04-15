@@ -74,9 +74,9 @@ class DBManager:
 
                 transactions.append(transaction)
 
+            return transactions
+
         except Exception as ex:
             print(ex)
 
         connection.close()
-
-        return transactions
