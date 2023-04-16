@@ -22,7 +22,6 @@ For a correct functioning of the app, follow the next steps:
 * First of all, you will need and API KEY to run the app, you can obtain it from: https://www.coinapi.io/pricing?apikey
 * Rename the "config copy.py" file to "configuration.py". 
 * Introduce your API Key in "configuration.py" in the corresponding variable.
-* Set your "secret key" and check if the other configuration options meet your needs.
 ***
 ### Database creation
 * You don't have to worry about the creation of the database, it will be created automatically when the app is started if it doesn't detect a previously created database. 
