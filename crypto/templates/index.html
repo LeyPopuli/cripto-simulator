@@ -6,7 +6,7 @@
 <h1 id="transactions-title">Transactions</h1>
 
 <section class="transactions">
-  <table>
+  <table id="transactions-table" class="display">
     <thead>
       <tr>
         <th class="column-name">Date</th>
@@ -25,5 +25,7 @@
 {% endblock contenido %}
 
 {% block scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script src="/static/js/index.js"></script>
 {% endblock scripts %}

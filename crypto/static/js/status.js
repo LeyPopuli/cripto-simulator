@@ -52,19 +52,35 @@ function showChart(response) {
             enabled: false
         },
         title: {
-            text: `Value in ${accountingCurrency} of cryptocurrencies`
+            text: `Value in ${accountingCurrency} of cryptocurrencies`,
+            style: {
+                fontFamily: 'Raleway, sans-serif',
+                fontSize: '25px',
+                fontWeight: 'bold'
+            }
         },
         xAxis: {
-            categories: Object.keys(cryptoBalance)
+            categories: Object.keys(cryptoBalance),
+            labels: {
+                style: {
+                    fontFamily: 'Open Sans, sans-serif',
+                    color: '#444444'
+                }
+            }
         },
         yAxis: {
             title: {
-                text: `Value in ${accountingCurrency}`
+                text: `Value in ${accountingCurrency}`,
+                style: {
+                    fontFamily: 'Open Sans, sans-serif',
+                    color: '#444444'
+                }
             }
         },
         series: [{
             name: `Value in ${accountingCurrency}`,
-            data: cryptoData
+            data: cryptoData,
+            color: '#5f7ae7'
         }]
     });
 

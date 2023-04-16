@@ -27,7 +27,7 @@ function showTransaction(response) {
     let html = '';
 
     if (transactions.length === 0) {
-        html = html + `
+        html += `
             <tr>
                 <td id="no-transactions-text" colspan="7">No transactions</td>
             </tr>
@@ -48,7 +48,7 @@ function showTransaction(response) {
             const unitPriceFormated = formater.format(transaction.origin_amount / transaction.destination_amount)
 
 
-            html = html + `
+            html += `
             <tr>
                 <td>${transaction.date}</td>
                 <td>${transaction.time}</td>
@@ -64,10 +64,32 @@ function showTransaction(response) {
 
     const table = document.querySelector('#table-body');
     table.innerHTML = html;
+    pagination();
 
     spinner.classList.add('off');
 
 }
+
+function pagination() {
+    $('#transactions-table').dataTable({
+        "pageLength": 10,
+        "pagingType": "simple_numbers",
+        "language": {
+            "lengthMenu": "Show _MENU_ transactions per page",
+            "zeroRecords": "No transactions found",
+            "info": "Showing page _PAGE_ of _PAGES_",
+            "infoEmpty": "No transactions available",
+            "infoFiltered": "(filtered from _MAX_ total transactions)",
+            "search": "Search: ",
+            "paginate": {
+                "first": "First",
+                "last": "Last",
+                "next": "Next",
+                "previous": "Previous"
+            }
+        }
+    });
+};
 
 window.addEventListener("load", function () {
     spinner = document.querySelector('#spinner');

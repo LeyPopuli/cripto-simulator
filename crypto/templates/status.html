@@ -3,18 +3,20 @@
 
 {% block contenido %}
 
-<div class="status-container">
-  <form id="status-form">
-    <h1 id="status-title">Status</h1>
-    <label for="investment"> Investment</label>
-    <input type="number" name="investment" id="investment" disabled>
-    <label for="currentvalue"> Current value</label>
-    <input type="number" name="currentvalue" id="currentvalue" disabled>
-  </form>
-</div>
+<div class="container">
+  <div class="status-container">
+    <form id="status-form">
+      <h1 id="status-title">Status</h1>
+      <label for="investment"> Investment</label>
+      <input type="number" name="investment" id="investment" disabled>
+      <label for="currentvalue"> Current value</label>
+      <input type="number" name="currentvalue" id="currentvalue" disabled>
+    </form>
+  </div>
 
-<div id="chart-container">
-  <div id="chart"></div>
+  <div id="chart-container">
+    <div id="chart"></div>
+  </div>
 </div>
 
 {% endblock contenido %}
