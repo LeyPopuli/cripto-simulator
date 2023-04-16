@@ -89,7 +89,7 @@ purchaseForm.addEventListener('submit', function (event) {
                 }
             })
             .then(data => showCalculation(data))
-            .catch(error => showToast('ERROR', 'An error ocurred, try again later.'));
+            .catch(error => showToast('ERROR', 'An error ocurred during the form loading, try again later.'));
     }
 });
 
@@ -127,7 +127,7 @@ hiddenForm.addEventListener('submit', function (event) {
         .then(() => {
             defaultPurchaseForm();
             getContent();
-        }).catch(error => showToast('ERROR', 'An error ocurred, try again later.'));
+        }).catch(error => showToast('ERROR', 'An error ocurred saving the transaction, try again later.'));
 });
 
 const checkButton = document.getElementById('check-button');

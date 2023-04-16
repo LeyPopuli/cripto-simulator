@@ -14,3 +14,4 @@ CREATE TABLE "transaction" (
 """
 
 # USER TABLE CREATION
+"Pending version 2.0"

@@ -18,7 +18,7 @@ function getStatus() {
             showStatus(response);
             showChart(response);
         })
-        .catch(error => showToast('ERROR', 'An error ocurred, try again later.'));
+        .catch(error => showToast('ERROR', 'An error ocurred during status calculation, try again later.'));
 };
 
 function showStatus(response) {
