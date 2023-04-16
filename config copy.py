@@ -3,7 +3,7 @@
 DB_PATH = 'data/cryptodb.db'
 
 # Add your coin.api KEY
-API_KEY = '36B1463E-26E8-443D-B983-B2413D9DE48B'
+API_KEY = 'INSERT YOURS'
 
 # Select your preferable crypto currencies
 AVAILABLE_CURRENCIES = ['BTC', 'ETH', 'USDT',
@@ -11,6 +11,3 @@ AVAILABLE_CURRENCIES = ['BTC', 'ETH', 'USDT',
 
 # Select your preferable accounting currency
 ACCOUNTING_CURRENCY = 'EUR'
-
-'''36B1463E-26E8-443D-B983-B2413D9DE48B'''
-'''7AC6DE2B-3594-4B65-B58F-527F4509A56E'''
