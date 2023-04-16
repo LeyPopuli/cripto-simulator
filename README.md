@@ -30,6 +30,9 @@ For a correct functioning of the app, follow the next steps:
 ### Time to RUN
 * Type in the terminal "flask run", please make sure you have the environment activate. 
 ***
+### Additional info
+* The auth part of the app will be continued in version 2.0 of the app.  Unfortunately, it could not be tackled with sufficient time and expertise and was preferred to be postponed rather than to be tackled imprecisely.
+
 ## Developer :computer:	
 Hi! My name is **Leyre**, as the final project of the Keepcoding Zero Bootcamp, I made a crypto investment simulator to play with the values to see if we can make our investment grow or not. 
 
