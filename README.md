@@ -9,7 +9,7 @@ For a correct functioning of the app, follow the next steps:
 ### Prepare the virtual environment
 * Clone this repository using git clone.
 * Once you have already open the repository in your favorite IDE, create the virtual environment, you can use in Windows: "python -m venv 'virtual environment name'". But if you are using Mac use this command: "python3 -m venv 'virtual environment name'". 
-* Don't forget to activate the virtual environment (for Windows): "'virtual environment name'/Scripts/activate". The command is a little bit different if you are using a Mac: "'virtual environment name'/bin/activate".
+* Don't forget to activate the virtual environment (for Windows): "'virtual environment name'\Scripts\activate". The command is a little bit different if you are using a Mac: "'virtual environment name'/bin/activate".
 ***
 ### Install dependencies
 * All the necessary dependencies are in the "requirements.txt" file, so let's install them all using pip: "pip install -r requirements.txt".
