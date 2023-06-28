@@ -1,3 +1,6 @@
+![demo-image](./demo-image.jpg)
+
+
 # Crypto-simulator :money_with_wings:
 
 Web application with which you can simulate the registration of investments and buying/selling of Cryptocurrencies and monitor the status of our investment.
